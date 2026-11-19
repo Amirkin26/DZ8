@@ -9,6 +9,16 @@ class Song
     private Song _prev;
 
     /// <summary>
+    /// Создает песню без параметров.
+    /// </summary>
+    public Song()
+    {
+        _name = "";
+        _author = "";
+        _prev = null;
+    }
+
+    /// <summary>
     /// Создает песню с названием и автором.
     /// Ссылка на предыдущую песню устанавливается в null.
     /// </summary>

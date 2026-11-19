@@ -4,23 +4,24 @@
 /// </summary>
 class BankAccount
 {
-    private static int lastAccountNumber = 0;
+    private static int _lastAccountNumber = 0;
 
-    private int accountNumber;
-    private decimal balance;
-    private AccountType type;
+    private int _accountNumber;
+    private decimal _balance;
+    private AccountType _type;
 
-    private System.Collections.Queue transactions = new System.Collections.Queue();
+    private System.Collections.Queue _transactions =
+        new System.Collections.Queue();
 
     /// <summary>
     /// Создает банковский счет со стандартными значениями.
     /// </summary>
     public BankAccount()
     {
-        lastAccountNumber++;
-        accountNumber = lastAccountNumber;
-        balance = 0;
-        type = AccountType.Текущий;
+        _lastAccountNumber++;
+        _accountNumber = _lastAccountNumber;
+        _balance = 0;
+        _type = AccountType.Текущий;
     }
 
     /// <summary>
@@ -28,7 +29,7 @@ class BankAccount
     /// </summary>
     public BankAccount(decimal balance) : this()
     {
-        this.balance = balance >= 0 ? balance : 0;
+        _balance = balance >= 0 ? balance : 0;
     }
 
     /// <summary>
@@ -36,7 +37,7 @@ class BankAccount
     /// </summary>
     public BankAccount(AccountType type) : this()
     {
-        this.type = type;
+        _type = type;
     }
 
     /// <summary>
@@ -44,8 +45,8 @@ class BankAccount
     /// </summary>
     public BankAccount(decimal balance, AccountType type) : this()
     {
-        this.balance = balance >= 0 ? balance : 0;
-        this.type = type;
+        _balance = balance >= 0 ? balance : 0;
+        _type = type;
     }
 
     /// <summary>
@@ -53,7 +54,7 @@ class BankAccount
     /// </summary>
     public int GetAccountNumber()
     {
-        return accountNumber;
+        return _accountNumber;
     }
 
     /// <summary>
@@ -61,7 +62,7 @@ class BankAccount
     /// </summary>
     public decimal GetBalance()
     {
-        return balance;
+        return _balance;
     }
 
     /// <summary>
@@ -69,7 +70,7 @@ class BankAccount
     /// </summary>
     public AccountType GetAccountType()
     {
-        return type;
+        return _type;
     }
 
     /// <summary>
@@ -79,8 +80,8 @@ class BankAccount
     {
         if (amount > 0)
         {
-            balance += amount;
-            transactions.Enqueue(new BankTransaction(amount));
+            _balance += amount;
+            _transactions.Enqueue(new BankTransaction(amount));
 
             Console.WriteLine("Деньги внесены.");
         }
@@ -99,10 +100,10 @@ class BankAccount
         {
             Console.WriteLine("Сумма должна быть положительной.");
         }
-        else if (amount <= balance)
+        else if (amount <= _balance)
         {
-            balance -= amount;
-            transactions.Enqueue(new BankTransaction(-amount));
+            _balance -= amount;
+            _transactions.Enqueue(new BankTransaction(-amount));
 
             Console.WriteLine("Деньги сняты.");
         }
@@ -117,9 +118,9 @@ class BankAccount
     /// </summary>
     public void PrintInfo()
     {
-        Console.WriteLine("Номер счета: " + accountNumber);
-        Console.WriteLine("Баланс: " + balance);
-        Console.WriteLine("Тип счета: " + type);
+        Console.WriteLine("Номер счета: " + _accountNumber);
+        Console.WriteLine("Баланс: " + _balance);
+        Console.WriteLine("Тип счета: " + _type);
     }
 
     /// <summary>
@@ -129,7 +130,7 @@ class BankAccount
     {
         using (StreamWriter writer = new StreamWriter("transactions.txt", true))
         {
-            foreach (BankTransaction transaction in transactions)
+            foreach (BankTransaction transaction in _transactions)
             {
                 writer.WriteLine("Банковская операция:");
                 writer.WriteLine("Дата и время: " + transaction.GetDate());
@@ -138,7 +139,7 @@ class BankAccount
             }
         }
 
-        transactions.Clear();
+        _transactions.Clear();
 
         GC.SuppressFinalize(this);
     }
