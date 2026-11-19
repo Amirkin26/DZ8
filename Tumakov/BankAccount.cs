@@ -10,8 +10,7 @@ class BankAccount
     private decimal _balance;
     private AccountType _type;
 
-    private System.Collections.Queue _transactions =
-        new System.Collections.Queue();
+    private System.Collections.Queue _transactions = new System.Collections.Queue();
 
     /// <summary>
     /// Создает банковский счет со стандартными значениями.
