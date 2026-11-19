@@ -1,6 +1,5 @@
-namespace Tumakov;
-
-public enum AccountType
+enum AccountType
 {
-    
+    Текущий,
+    Сберегательный
 }

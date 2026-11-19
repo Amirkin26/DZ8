@@ -1,5 +1,5 @@
 
-enum TastStatus
+enum TaskStatus
 {
     Назначена,
     ВРаботе,

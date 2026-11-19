@@ -1,6 +1,7 @@
-namespace Latypova;
 
-public enum ProjectStatus
+enum ProjectStatus
 {
-    
+    Проект,
+    Исполнение,
+    Закрыт
 }
